@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace CarStatistica
 {
@@ -25,8 +26,22 @@ namespace CarStatistica
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("SqlExpress")));
+            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddIdentityCore<User>().AddRoles<IdentityRole>().AddUserStore<User>().AddUserManager<User>().AddEntityFrameworkStores<AppDbContext>();
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
+            //    {
+            //        OnRedirectToLogin = ctx =>
+            //        {
+            //            ctx.Response.Redirect("/Login/Login");
+
+            //            return Task.CompletedTask;
+            //        }
+            //    };
+            //});
+            services.ConfigureApplicationCookie(o => o.LoginPath = "/Login/Login");
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
@@ -36,6 +51,7 @@ namespace CarStatistica
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             });
+
             services.AddMvc();
         }
 
@@ -46,7 +62,7 @@ namespace CarStatistica
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseAuthentication();

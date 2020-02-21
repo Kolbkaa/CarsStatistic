@@ -1,0 +1,13 @@
+﻿
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Zalogowano pomyślnie";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h3>Zalogowano poprawnie</h3>
+    <h4>Witaj @UserManager.GetUserName(User)!</h4>
+}

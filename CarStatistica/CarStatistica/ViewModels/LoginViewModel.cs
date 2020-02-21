@@ -16,6 +16,7 @@ namespace CarStatistica.ViewModels
         [Required(ErrorMessage = "To pole jest wymagane")]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "Minimum 6 znaków")]
         [Display(Name = "Hasło")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         public bool RememberMe { get; set; }
