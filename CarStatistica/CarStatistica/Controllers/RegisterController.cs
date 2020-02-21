@@ -18,7 +18,7 @@ namespace CarStatistica.Controllers
         {
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public IActionResult Register()
         {
             return View();
         }
@@ -27,7 +27,7 @@ namespace CarStatistica.Controllers
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
             if (!ModelState.IsValid)
-                return View("index",registerViewModel);
+                return View(registerViewModel);
 
             var user = new User(registerViewModel.Login) { Email = registerViewModel.Email};
 
@@ -40,7 +40,7 @@ namespace CarStatistica.Controllers
                     ModelState.AddModelError("",error.Description);
                 }
 
-                return View("Index", registerViewModel);
+                return View( registerViewModel);
             }
 
             return RedirectToAction("Succeed",registerViewModel);
