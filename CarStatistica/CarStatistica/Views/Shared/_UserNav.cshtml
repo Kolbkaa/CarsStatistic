@@ -1,0 +1,14 @@
+﻿@inject SignInManager<User> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Zarządzaj
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-controller="Car" asp-action="Index">Wyświetl samochody</a>
+            <a class="dropdown-item" asp-controller="Car" asp-action="Add">Dodaj samochód</a>
+        </div>
+    </div>
+}

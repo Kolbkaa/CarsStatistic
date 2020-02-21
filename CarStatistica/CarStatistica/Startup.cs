@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CarStatistica.Data;
+using CarStatistica.Data.Repositories;
+using CarStatistica.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,18 +30,6 @@ namespace CarStatistica
                 options.UseSqlServer(_configuration.GetConnectionString("SqlExpress")));
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AppDbContext>();
 
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
-            //    {
-            //        OnRedirectToLogin = ctx =>
-            //        {
-            //            ctx.Response.Redirect("/Login/Login");
-
-            //            return Task.CompletedTask;
-            //        }
-            //    };
-            //});
             services.ConfigureApplicationCookie(o => o.LoginPath = "/Login/Login");
 
             services.Configure<IdentityOptions>(options =>
@@ -53,6 +43,9 @@ namespace CarStatistica
             });
 
             services.AddMvc();
+
+
+            services.AddScoped<ICarRepository<Car>, CarRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
