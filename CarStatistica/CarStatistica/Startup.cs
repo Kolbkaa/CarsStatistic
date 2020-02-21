@@ -26,7 +26,7 @@ namespace CarStatistica
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("SqlExpress")));
 
-            services.AddIdentityCore<User>().AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentityCore<User>().AddRoles<IdentityRole>().AddUserStore<User>().AddUserManager<User>().AddEntityFrameworkStores<AppDbContext>();
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
