@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarStatistica.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace CarStatistica.Data
@@ -12,5 +13,8 @@ namespace CarStatistica.Data
         {
             
         }
+
+
+        public ICollection<Car> Cars { get; set; }
     }
 }

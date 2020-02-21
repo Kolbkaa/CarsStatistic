@@ -4,6 +4,7 @@
             <li class="nav-item active">
                 <a class="nav-link" asp-controller="Home" asp-action="Index">Strona główna</a>
             </li>
+            @await Html.PartialAsync("_UserNav")
         </ul>
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
