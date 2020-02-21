@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarStatistica.Data
 {
-    public class AppDbContext:IdentityDbContext
+    public class AppDbContext:IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions dbContextOptions):base(dbContextOptions)
         {
