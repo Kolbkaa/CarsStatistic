@@ -8,5 +8,9 @@ namespace CarStatistica.Data
 {
     public class User:IdentityUser
     {
+        public User(string userName):base(userName:userName)
+        {
+            
+        }
     }
 }

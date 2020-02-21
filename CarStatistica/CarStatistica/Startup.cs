@@ -27,7 +27,15 @@ namespace CarStatistica
                 options.UseSqlServer(_configuration.GetConnectionString("SqlExpress")));
 
             services.AddIdentityCore<User>().AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
-
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            });
             services.AddMvc();
         }
 
