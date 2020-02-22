@@ -16,5 +16,6 @@ namespace CarStatistica.Data
         }
 
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Costs> Costs { get; set; }
     }
 }
