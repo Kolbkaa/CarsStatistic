@@ -68,5 +68,36 @@ namespace CarStatistica.Controllers
             var carList = await _carRepository.GetAll(user);
             return View(carList);
         }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return RedirectToAction("Index");
+
+            var carToDelete = await _carRepository.Get(id, user);
+
+            return View(carToDelete);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return RedirectToAction("Index");
+
+            var result =await _carRepository.Delete(id, user);
+
+            if (!result)
+            {
+                return View("Index");
+            }
+            
+            return RedirectToAction("Index");
+
+        }
+
+       
     }
 }
