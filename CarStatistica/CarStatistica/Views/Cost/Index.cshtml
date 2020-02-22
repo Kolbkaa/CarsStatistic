@@ -1,0 +1,16 @@
+﻿@model int
+@{
+    ViewData["Title"] = "Koszty";
+}
+<div>
+    <h4>Rodzaje kosztów:</h4>
+    <ul>
+        <li><a asp-action="Add" asp-controller="Refueling" asp-route-id="@Model">Dodaj tankowanie</a> </li>
+        <li><a asp-action="Add" asp-controller="Purchase" asp-route-id="@Model">Dodaj zakup</a></li>
+        <li><a asp-action="Add" asp-controller="Repair" asp-route-id="@Model">Dodaj zakup</a></li>
+        <li><a asp-action="Add" asp-controller="Insurance" asp-route-id="@Model">Dodaj ubezpieczenie</a></li>
+        <li><a asp-action="Add" asp-controller="TechnicalReview" asp-route-id="@Model">Dodaj badanie techniczne</a></li>
+    </ul>
+</div>
+
+

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using CarStatistica.Data;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace CarStatistica.Models
 {
@@ -17,6 +18,7 @@ namespace CarStatistica.Models
         public Car()
         {
             CreateDate = DateTime.Now;
+            Costs = new Costs();
         }
 
         public int Id
@@ -65,7 +67,12 @@ namespace CarStatistica.Models
         [Display(Name = "Ostatnia data edycji")]
         public DateTime LastEdit { get; private set; }
 
+        public int CostsId { get; set; }
+        public Costs Costs { get; set; }
+
         public User User { get; set; }
+
+
         private void ChangeEditDate()
         {
             LastEdit = DateTime.Now;
