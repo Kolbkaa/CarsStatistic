@@ -24,10 +24,16 @@ namespace CarStatistica
         {
             _configuration = configuration;
         }
+
+        public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddDebug(); });
+
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(_configuration.GetConnectionString("SqlExpress")));
+                options.UseSqlServer(_configuration.GetConnectionString("SqlExpress")).UseLoggerFactory(MyLoggerFactory)
+            );
+
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AppDbContext>();
 
             services.ConfigureApplicationCookie(o => o.LoginPath = "/Login/Login");
@@ -42,10 +48,12 @@ namespace CarStatistica
                 options.Password.RequireLowercase = false;
             });
 
-            services.AddMvc();
+            services.AddMvc().AddMvcOptions(options =>
+                options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => "Wartoœæ nie prawid³owa"));
 
 
             services.AddScoped<ICarRepository<Car>, CarRepository>();
+            services.AddScoped<IRefuelingRepository<Refueling>, RefuelingRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

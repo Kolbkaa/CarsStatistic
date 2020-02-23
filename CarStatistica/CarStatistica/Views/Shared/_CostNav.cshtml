@@ -1,0 +1,58 @@
+﻿<div>
+    <h4>Rodzaje kosztów:</h4>
+
+    <div class="btn-group dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Tankowania
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-action="Add" asp-controller="Refueling" asp-route-id="@Model">Dodaj</a>
+            <a class="dropdown-item" asp-action="Index" asp-controller="Refueling" asp-route-id="@Model">Wyświetl</a>
+            <a class="dropdown-item" asp-action="Average" asp-controller="Refueling" asp-route-id="@Model">Średnie spalanie</a>
+        </div>
+    </div>
+
+
+    <div class="btn-group dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Zakupy
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-action="Add" asp-controller="Purchase" asp-route-id="@Model">Dodaj</a>
+            <a class="dropdown-item" asp-action="Index" asp-controller="Purchase" asp-route-id="@Model">Wyświetl</a>
+        </div>
+    </div>
+
+
+    <div class="btn-group dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Ubezpieczenia
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-action="Add" asp-controller="Insurance" asp-route-id="@Model">Dodaj</a>
+            <a class="dropdown-item" asp-action="Index" asp-controller="Insurance" asp-route-id="@Model">Wyświetl</a>
+        </div>
+    </div>
+
+    <div class="btn-group dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Naprawy
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-action="Add" asp-controller="Repair" asp-route-id="@Model">Dodaj</a>
+            <a class="dropdown-item" asp-action="Index" asp-controller="Repair" asp-route-id="@Model">Wyświetl</a>
+        </div>
+    </div>
+
+    <div class="btn-group dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Badania techniczne
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-action="Add" asp-controller="TechnicalReview" asp-route-id="@Model">Dodaj</a>
+            <a class="dropdown-item" asp-action="Index" asp-controller="TechnicalReview" asp-route-id="@Model">Wyświetl</a>
+        </div>
+    </div>
+
+
+</div>
