@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarStatistica.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200222132726_CostsTabel")]
-    partial class CostsTabel
+    [Migration("20200222232354_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -134,6 +134,38 @@ namespace CarStatistica.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Costs");
+                });
+
+            modelBuilder.Entity("CarStatistica.Models.Refueling", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CostsId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Mileage")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Value")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CostsId");
+
+                    b.ToTable("Refuelings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -282,6 +314,15 @@ namespace CarStatistica.Migrations
                     b.HasOne("CarStatistica.Data.User", "User")
                         .WithMany("Cars")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CarStatistica.Models.Refueling", b =>
+                {
+                    b.HasOne("CarStatistica.Models.Costs", "Costs")
+                        .WithMany("Refuelings")
+                        .HasForeignKey("CostsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

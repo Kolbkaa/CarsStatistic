@@ -42,10 +42,12 @@ namespace CarStatistica
                 options.Password.RequireLowercase = false;
             });
 
-            services.AddMvc();
+            services.AddMvc().AddMvcOptions(options =>
+                options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => "Wartoœæ nie prawid³owa"));
 
 
             services.AddScoped<ICarRepository<Car>, CarRepository>();
+            services.AddScoped<IRefuelingRepository<Refueling>, RefuelingRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
