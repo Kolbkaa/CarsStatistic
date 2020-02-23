@@ -37,7 +37,7 @@ namespace CarStatistica.Models
 
         [Display(Name = "Uwagi")]
         public string Comments { get; }
-
+        [Display(Name = "Średnie spalanie")]
         public decimal Average { get; }
 
     }

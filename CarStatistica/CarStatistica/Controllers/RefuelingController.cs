@@ -35,7 +35,7 @@ namespace CarStatistica.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = id });
 
             TempData["CarId"] = id;
 
@@ -51,7 +51,7 @@ namespace CarStatistica.Controllers
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = id });
 
             TempData["CarId"] = id;
 
@@ -73,11 +73,26 @@ namespace CarStatistica.Controllers
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = id });
 
             var refuelingList = await _refuelingRepository.GetAll(id, user);
 
             return View(AverageRefuelingService.GenerateAverageRefuelingList(refuelingList));
+        }
+
+        public async Task<IActionResult> Delete(int refuelingId,int carId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return RedirectToAction("Index", new { id = carId });
+
+            var result = await _refuelingRepository.Delete(refuelingId, carId, user);
+            //if (!result)
+                return RedirectToAction("Index",new {id=carId});
+
+
+
+
         }
     }
 }

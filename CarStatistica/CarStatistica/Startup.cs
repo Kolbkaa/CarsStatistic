@@ -24,10 +24,16 @@ namespace CarStatistica
         {
             _configuration = configuration;
         }
+
+        public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddDebug(); });
+
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(_configuration.GetConnectionString("SqlExpress")));
+                options.UseSqlServer(_configuration.GetConnectionString("SqlExpress")).UseLoggerFactory(MyLoggerFactory)
+            );
+
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AppDbContext>();
 
             services.ConfigureApplicationCookie(o => o.LoginPath = "/Login/Login");

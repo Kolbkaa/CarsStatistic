@@ -21,14 +21,14 @@ namespace CarStatistica.Service
             {
                 var averageRefueling = CalcAvg(refuelingList[i - 1], refuelingList[i]);
 
-                list.Insert(0,new AverageRefueling(refuelingList[i].Value, refuelingList[i].Cost, refuelingList[i].Mileage, refuelingList[i].Date, refuelingList[i].Comments, averageRefueling));
+                list.Insert(0, new AverageRefueling(refuelingList[i].Value, refuelingList[i].Cost, refuelingList[i].Mileage, refuelingList[i].Date, refuelingList[i].Comments, averageRefueling));
             }
             return list;
         }
 
         private static decimal CalcAvg(Refueling earlierRefueling, Refueling lateRefueling)
         {
-            return (lateRefueling.Mileage - earlierRefueling.Mileage) / lateRefueling.Value;
+            return (lateRefueling.Value / (lateRefueling.Mileage - earlierRefueling.Mileage)) * 100;
         }
     }
 }
