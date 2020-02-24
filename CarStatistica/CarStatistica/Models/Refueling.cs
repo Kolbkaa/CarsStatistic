@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,6 +33,7 @@ namespace CarStatistica.Models
 
         [Display(Name = "Uwagi")]
         public string Comments { get; set; }
+        [NotMapped]
         [Display(Name = "Cena")]
         public decimal Price => Cost != 0 ? (Cost / Value) : 0;
 
