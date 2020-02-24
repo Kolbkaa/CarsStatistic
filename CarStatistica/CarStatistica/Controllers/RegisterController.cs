@@ -33,6 +33,8 @@ namespace CarStatistica.Controllers
 
             var createResult = await _userManager.CreateAsync(user, registerViewModel.Password);
 
+            TempData["UserName"] = registerViewModel.Login;
+
             if (createResult.Succeeded == false)
             {
                 foreach (var error in createResult.Errors)
@@ -43,7 +45,7 @@ namespace CarStatistica.Controllers
                 return View( registerViewModel);
             }
 
-            return RedirectToAction("Succeed",registerViewModel);
+            return RedirectToAction("Succeed");
         }
 
         [HttpGet]

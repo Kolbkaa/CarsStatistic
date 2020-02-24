@@ -1,4 +1,4 @@
-﻿@model CarStatistica.ViewModels.RegisterViewModel
+﻿
 
 @{
     ViewData["Title"] = "Zarejestrowano poprawnie";
@@ -7,5 +7,5 @@
 
 
 <div>
-Konto @Model.Login zostało utworzone poprawnie. Możesz się zalogować.
+Konto @TempData["UserName"] zostało utworzone poprawnie. Możesz się zalogować.
 </div>
