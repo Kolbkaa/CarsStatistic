@@ -17,6 +17,9 @@
                 @Html.DisplayNameFor(model => model.Cost)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Mileage)
             </th>
             <th>
@@ -32,27 +35,30 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Value)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mileage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comments)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mileage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
 
-                <td>
-                    @Html.ActionLink("Usuń", "Delete", new {refuelingId=item.Id, carId = @TempData["CarId"] })
-                </td>
-            </tr>
+            <td>
+                @Html.ActionLink("Usuń", "Delete", new { refuelingId = item.Id, carId = @TempData["CarId"] })
+            </td>
+        </tr>
         }
     </tbody>
 </table>

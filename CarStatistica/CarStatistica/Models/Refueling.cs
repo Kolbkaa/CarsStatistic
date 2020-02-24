@@ -32,6 +32,8 @@ namespace CarStatistica.Models
 
         [Display(Name = "Uwagi")]
         public string Comments { get; set; }
+        [Display(Name = "Cena")]
+        public decimal Price => Cost != 0 ? (Cost / Value) : 0;
 
 
         public int CostsId { get; set; }
