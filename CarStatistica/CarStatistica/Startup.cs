@@ -33,7 +33,7 @@ namespace CarStatistica
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(_configuration.GetConnectionString("WebioSqlExpress")).UseLoggerFactory(MyLoggerFactory)
+                options.UseSqlServer(_configuration.GetConnectionString("SqlExpress")).UseLoggerFactory(MyLoggerFactory)
             );
 
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AppDbContext>();
