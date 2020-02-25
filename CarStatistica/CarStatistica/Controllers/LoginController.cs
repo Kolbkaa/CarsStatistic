@@ -33,8 +33,8 @@ namespace CarStatistica.Controllers
 
             if (loginResult.Succeeded == false)
             {
-                
-                ModelState.AddModelError("","Nie można się zalogować");
+
+                ModelState.AddModelError("", "Nie można się zalogować");
                 return View(loginViewModel);
             }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CarStatistica.ViewModels
 {
@@ -15,20 +11,20 @@ namespace CarStatistica.ViewModels
 
         [Required(ErrorMessage = "To pole jest wymagane")]
         [DataType(DataType.Password)]
-        [StringLength(20,MinimumLength = 6,ErrorMessage = "Minimum 6 znaków")]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "Minimum 6 znaków")]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
 
 
         [Required(ErrorMessage = "To pole jest wymagane")]
-        [Compare(nameof(Password),ErrorMessage = "Hasła nie zgodne")]
+        [Compare(nameof(Password), ErrorMessage = "Hasła nie zgodne")]
         [DataType(DataType.Password)]
         [Display(Name = "Powtórz hasło")]
         public string ConfirmPassword { get; set; }
 
 
         [Required(ErrorMessage = "To pole jest wymagane")]
-        [DataType(DataType.EmailAddress,ErrorMessage = "Wprowadź poprawny adres email")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Wprowadź poprawny adres email")]
         public string Email { get; set; }
     }
 }

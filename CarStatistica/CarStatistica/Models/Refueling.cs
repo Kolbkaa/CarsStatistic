@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CarStatistica.Models
 {
@@ -23,7 +20,7 @@ namespace CarStatistica.Models
 
         [Required(ErrorMessage = "To pole jest wymagane")]
         [Display(Name = "Przebieg")]
-        [Range(0,Int32.MaxValue,ErrorMessage = "Tylko wartości dodatnie")]
+        [Range(0, Int32.MaxValue, ErrorMessage = "Tylko wartości dodatnie")]
         public int Mileage { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]

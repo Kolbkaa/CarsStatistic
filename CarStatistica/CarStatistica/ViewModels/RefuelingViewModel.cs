@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CarStatistica.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using CarStatistica.Models;
 
 namespace CarStatistica.ViewModels
 {
     public class RefuelingViewModel
     {
-        
+
 
         [Required(ErrorMessage = "To pole jest wymagane")]
         [Display(Name = "Ilość paliwa")]
-        
+
         public decimal Value { get; set; }
 
         [Required(ErrorMessage = "To pole jest wymagane")]
@@ -27,7 +24,7 @@ namespace CarStatistica.ViewModels
 
         [Required(ErrorMessage = "To pole jest wymagane")]
         [Display(Name = "Data tankowania")]
-        [DataType(DataType.Date,ErrorMessage = "Nie prawidłowa wartość")]
+        [DataType(DataType.Date, ErrorMessage = "Nie prawidłowa wartość")]
         public DateTime Date { get; set; } = DateTime.Now;
 
 

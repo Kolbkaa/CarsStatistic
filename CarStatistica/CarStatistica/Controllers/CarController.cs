@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CarStatistica.Data;
+﻿using CarStatistica.Data;
 using CarStatistica.Data.Repositories;
 using CarStatistica.Models;
 using CarStatistica.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace CarStatistica.Controllers
 {
@@ -39,7 +36,7 @@ namespace CarStatistica.Controllers
 
             if (user == null)
             {
-                ModelState.AddModelError("","Błąd użytkownika");
+                ModelState.AddModelError("", "Błąd użytkownika");
                 return View(carViewModel);
             }
 
@@ -49,7 +46,7 @@ namespace CarStatistica.Controllers
 
             var result = await _carRepository.Add(car);
 
-            if(!result)
+            if (!result)
             {
                 ModelState.AddModelError("", "Błąd dodawania pojazdu");
                 return View(carViewModel);
@@ -93,11 +90,11 @@ namespace CarStatistica.Controllers
             {
                 return RedirectToAction("Index");
             }
-            
+
             return RedirectToAction("Index");
 
         }
 
-       
+
     }
 }

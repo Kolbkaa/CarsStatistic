@@ -18,7 +18,7 @@ namespace CarStatistica.Data.Repositories
             var car = await _appDbContext.Cars.Include(car => car.Costs).ThenInclude(costs => costs.Refuelings)
                 .SingleAsync(car => car.Id == carId && car.User.Equals(user));
 
-            
+
 
             car.Costs.Refuelings.Add(model);
 

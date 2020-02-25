@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CarStatistica.Data;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using CarStatistica.Data;
-using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace CarStatistica.Models
 {
@@ -28,7 +24,7 @@ namespace CarStatistica.Models
             {
                 _id = value;
                 ChangeEditDate();
-            } 
+            }
         }
         [Display(Name = "Marka")]
         public string Brand

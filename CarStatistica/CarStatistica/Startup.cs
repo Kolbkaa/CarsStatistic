@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using CarStatistica.Data;
 using CarStatistica.Data.Repositories;
 using CarStatistica.Models;
@@ -16,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace CarStatistica
 {
@@ -96,6 +93,9 @@ namespace CarStatistica
                 });
                 app.UseHsts();
             }
+
+            app.UseStaticFiles(); // For the wwwroot folder
+
             app.UseHttpsRedirection();
             app.UseRouting();
 
