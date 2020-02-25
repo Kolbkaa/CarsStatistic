@@ -1,10 +1,8 @@
-﻿using System;
+﻿using CarStatistica.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using CarStatistica.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace CarStatistica.Data.Repositories
 {
@@ -20,6 +18,8 @@ namespace CarStatistica.Data.Repositories
             var car = await _appDbContext.Cars.Include(car => car.Costs).ThenInclude(costs => costs.Refuelings)
                 .SingleAsync(car => car.Id == carId && car.User.Equals(user));
 
+            
+
             car.Costs.Refuelings.Add(model);
 
             if (car.ActualMileage < model.Mileage)
@@ -33,7 +33,7 @@ namespace CarStatistica.Data.Repositories
         {
             var list = await _appDbContext.Cars.Include(car => car.Costs).ThenInclude(costs => costs.Refuelings)
                 .SingleAsync(x => x.Id == carId && x.User.Equals(user));
-            return new List<Refueling>(list.Costs.Refuelings.OrderByDescending(x=>x.Mileage));
+            return new List<Refueling>(list.Costs.Refuelings.OrderByDescending(x => x.Mileage));
         }
 
         public async Task<bool> Delete(int refuelingId, int carId, User user)
@@ -45,7 +45,35 @@ namespace CarStatistica.Data.Repositories
 
             var result = await _appDbContext.SaveChangesAsync();
             return result == 1;
-            
+
+        }
+
+        public async Task<bool> IsRefuelingGoodOrder(Refueling model, int carId, User user)
+        {
+            var refuelingCount = _appDbContext.Cars.Include(car => car.Costs.Refuelings).SingleOrDefault(car => car.Id == carId && car.User.Equals(user))?.Costs.Refuelings.Count;
+
+            if (refuelingCount == 0)
+                return true;
+
+            var earlierRefueling = await _appDbContext?.Refuelings?.Include(x => x.Costs)?.ThenInclude(x => x.Car)
+                ?.Where(car => car.Costs.Car.Id == carId && car.Costs.Car.User.Equals(user))?.Where(x => x.Mileage <= model.Mileage)
+                ?.OrderByDescending(x => x.Mileage)?.FirstOrDefaultAsync();
+
+            if (earlierRefueling != null)
+                if (earlierRefueling.Date > model.Date)
+                    return false;
+
+
+            var laterRefueling = await _appDbContext?.Refuelings?.Include(x => x.Costs)?.ThenInclude(x => x.Car)
+                ?.Where(car => car.Costs.Car.Id == carId && car.Costs.Car.User.Equals(user))?.Where(x => x.Mileage >= model.Mileage)
+                ?.OrderBy(x => x.Mileage)?.FirstOrDefaultAsync();
+
+            if (laterRefueling != null)
+                if (laterRefueling.Date < model.Date)
+                    return false;
+
+
+            return true;
         }
     }
 }
