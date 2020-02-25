@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CarStatistica.Models;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using CarStatistica.Models;
 
 namespace CarStatistica.ViewModels
 {
@@ -24,7 +20,7 @@ namespace CarStatistica.ViewModels
 
         public Car GetCar()
         {
-            return  new Car()
+            return new Car()
             {
                 Brand = Brand,
                 Type = Type,

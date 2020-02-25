@@ -1,7 +1,7 @@
 ﻿namespace CarStatistica.Data.Repositories
 {
-    public interface ICarRepository<T>:IRepository<T>
+    public interface ICarRepository<T> : IRepository<T>
     {
-        
+
     }
 }

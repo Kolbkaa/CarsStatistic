@@ -9,32 +9,32 @@
 <h4>Lista tankowań</h4>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Value)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mileage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mileage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
 
-            <th></th>
-        </tr>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Value)
@@ -56,9 +56,10 @@
             </td>
 
             <td>
-                @Html.ActionLink("Usuń", "Delete", new { refuelingId = item.Id, carId = @TempData["CarId"] })
+                @Html.ActionLink("Usuń", "Delete", new { refuelingId = item.Id, carId = @TempData["CarId"] }, new { @class = "confirm" })
             </td>
         </tr>
-        }
+    }
     </tbody>
 </table>
+<script src="~/js/confirmDelete.js" type="text/javascript"></script>

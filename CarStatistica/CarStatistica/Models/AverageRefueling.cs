@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace CarStatistica.Models
 {
     public class AverageRefueling
     {
 
-        public AverageRefueling(decimal value,decimal cost,int mileage,DateTime date, string comments, decimal average)
+        public AverageRefueling(decimal value, decimal cost, int mileage, DateTime date, string comments, decimal average)
         {
             Value = value;
             Cost = cost;

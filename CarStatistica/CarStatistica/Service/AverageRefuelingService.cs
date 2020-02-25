@@ -1,8 +1,6 @@
-﻿using System;
+﻿using CarStatistica.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using CarStatistica.Models;
 
 namespace CarStatistica.Service
 {

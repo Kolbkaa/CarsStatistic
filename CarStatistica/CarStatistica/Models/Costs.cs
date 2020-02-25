@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CarStatistica.Models
 {
@@ -9,7 +6,7 @@ namespace CarStatistica.Models
     {
         public int Id { get; set; }
 
-        
+
         public Car Car { get; set; }
 
         public ICollection<Refueling> Refuelings { get; set; }

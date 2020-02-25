@@ -40,10 +40,10 @@ namespace CarStatistica.Controllers
             TempData["CarId"] = id;
             return View();
         }
-        
+
 
         [HttpPost]
-        public async Task<IActionResult> Add(RefuelingViewModel refuelingViewModel,int id)
+        public async Task<IActionResult> Add(RefuelingViewModel refuelingViewModel, int id)
         {
             if (!ModelState.IsValid)
                 return View(refuelingViewModel);
@@ -68,7 +68,7 @@ namespace CarStatistica.Controllers
                 return View(refuelingViewModel);
             }
 
-            return RedirectToAction("Index",new{id = id});
+            return RedirectToAction("Index", new { id = id });
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CarStatistica.Controllers
             return View(AverageRefuelingService.GenerateAverageRefuelingList(refuelingList));
         }
 
-        public async Task<IActionResult> Delete(int refuelingId,int carId)
+        public async Task<IActionResult> Delete(int refuelingId, int carId)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -93,7 +93,7 @@ namespace CarStatistica.Controllers
 
             var result = await _refuelingRepository.Delete(refuelingId, carId, user);
             //if (!result)
-                return RedirectToAction("Index",new {id=carId});
+            return RedirectToAction("Index", new { id = carId });
 
 
 

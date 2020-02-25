@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CarStatistica.Data;
+﻿using CarStatistica.Data;
 using CarStatistica.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp;
+using System.Threading.Tasks;
 
 namespace CarStatistica.Controllers
 {
@@ -29,7 +25,7 @@ namespace CarStatistica.Controllers
             if (!ModelState.IsValid)
                 return View(registerViewModel);
 
-            var user = new User(registerViewModel.Login) { Email = registerViewModel.Email};
+            var user = new User(registerViewModel.Login) { Email = registerViewModel.Email };
 
             var createResult = await _userManager.CreateAsync(user, registerViewModel.Password);
 
@@ -39,10 +35,10 @@ namespace CarStatistica.Controllers
             {
                 foreach (var error in createResult.Errors)
                 {
-                    ModelState.AddModelError("",error.Description);
+                    ModelState.AddModelError("", error.Description);
                 }
 
-                return View( registerViewModel);
+                return View(registerViewModel);
             }
 
             return RedirectToAction("Succeed");
