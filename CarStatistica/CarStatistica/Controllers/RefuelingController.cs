@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CarStatistica.Data;
+﻿using CarStatistica.Data;
 using CarStatistica.Data.Repositories;
 using CarStatistica.Models;
 using CarStatistica.Service;
@@ -10,6 +6,7 @@ using CarStatistica.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace CarStatistica.Controllers
 {
@@ -25,12 +22,6 @@ namespace CarStatistica.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add(int id)
-        {
-            TempData["CarId"] = id;
-            return View();
-        }
-        [HttpGet]
         public async Task<IActionResult> Index(int id)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -39,9 +30,17 @@ namespace CarStatistica.Controllers
 
             TempData["CarId"] = id;
 
-            var listRefueling = await _refuelingRepository.GetAll(id,user);
+            var listRefueling = await _refuelingRepository.GetAll(id, user);
             return View(listRefueling);
         }
+
+        [HttpGet]
+        public IActionResult Add(int id)
+        {
+            TempData["CarId"] = id;
+            return View();
+        }
+        
 
         [HttpPost]
         public async Task<IActionResult> Add(RefuelingViewModel refuelingViewModel,int id)
@@ -54,6 +53,12 @@ namespace CarStatistica.Controllers
                 return RedirectToAction("Index", new { id = id });
 
             TempData["CarId"] = id;
+
+            if (await _refuelingRepository.IsRefuelingGoodOrder(refuelingViewModel.GetRefueling(), id, user) == false)
+            {
+                ModelState.AddModelError("", "Nie prawidłowa chronologia");
+                return View(refuelingViewModel);
+            }
 
             var result = await _refuelingRepository.Add(refuelingViewModel.GetRefueling(), id, user);
 

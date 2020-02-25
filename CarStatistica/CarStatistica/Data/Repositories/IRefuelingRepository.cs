@@ -1,8 +1,6 @@
-﻿using System;
+﻿using CarStatistica.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using CarStatistica.Models;
 
 namespace CarStatistica.Data.Repositories
 {
@@ -12,5 +10,7 @@ namespace CarStatistica.Data.Repositories
         Task<List<Refueling>> GetAll(int carId, User user);
 
         Task<bool> Delete(int refuelingId, int carId, User user);
+
+        Task<bool> IsRefuelingGoodOrder(T model, int carId, User user);
     }
 }
