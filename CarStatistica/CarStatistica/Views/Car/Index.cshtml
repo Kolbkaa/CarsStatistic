@@ -61,7 +61,7 @@
                         @Html.DisplayFor(modelItem => item.LastEdit)
                     </td>
                     <td>
-                        @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.Id }) | 
                         @Html.ActionLink("Koszty", "Index","Cost", new { id = item.Id })
                     </td>
                 </tr>

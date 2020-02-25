@@ -39,7 +39,7 @@ namespace CarStatistica.Data.Repositories
             _appDbContext.Cars.Remove(car);
             var result = await _appDbContext.SaveChangesAsync();
 
-            return result > 1;
+            return result > 0;
         }
     }
 }

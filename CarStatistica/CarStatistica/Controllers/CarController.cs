@@ -87,11 +87,11 @@ namespace CarStatistica.Controllers
             if (user == null)
                 return RedirectToAction("Index");
 
-            var result =await _carRepository.Delete(id, user);
+            var result = await _carRepository.Delete(id, user);
 
             if (!result)
             {
-                return View("Index");
+                return RedirectToAction("Index");
             }
             
             return RedirectToAction("Index");
