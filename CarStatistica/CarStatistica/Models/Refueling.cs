@@ -35,8 +35,9 @@ namespace CarStatistica.Models
         public decimal Price => Cost != 0 ? (Cost / Value) : 0;
 
 
-        public int CostsId { get; set; }
-        public Costs Costs { get; set; }
+        public int CarId { get; set; }
+        [Required]
+        public Car Car { get; set; }
 
 
     }

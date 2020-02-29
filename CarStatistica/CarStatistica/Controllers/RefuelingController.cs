@@ -28,7 +28,7 @@ namespace CarStatistica.Controllers
             if (user == null)
                 return RedirectToAction("Index", new { id = id });
 
-            TempData["CarId"] = id;
+            //TempData["CarId"] = id;
 
             var listRefueling = await _refuelingRepository.GetAll(id, user);
             return View(listRefueling);
@@ -37,7 +37,7 @@ namespace CarStatistica.Controllers
         [HttpGet]
         public IActionResult Add(int id)
         {
-            TempData["CarId"] = id;
+            //TempData["CarId"] = id;
             return View();
         }
 
@@ -52,7 +52,7 @@ namespace CarStatistica.Controllers
             if (user == null)
                 return RedirectToAction("Index", new { id = id });
 
-            TempData["CarId"] = id;
+            //TempData["CarId"] = id;
 
             if (await _refuelingRepository.IsRefuelingGoodOrder(refuelingViewModel.GetRefueling(), id, user) == false)
             {
@@ -74,7 +74,7 @@ namespace CarStatistica.Controllers
         [HttpGet]
         public async Task<IActionResult> Average(int id)
         {
-            TempData["CarId"] = id;
+            //TempData["CarId"] = id;
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)

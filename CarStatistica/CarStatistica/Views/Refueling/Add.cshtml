@@ -4,13 +4,13 @@
     ViewData["Title"] = "Dodaj tankowanie";
 }
 
-@await Html.PartialAsync("_CostNav", @TempData["CarId"])
+@await Html.PartialAsync("_CostNav", @Url.ActionContext.RouteData.Values["id"])
 
 <h4>Dodaj tankowanie</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Add" asp-route-id="@TempData["CarId"]">
+        <form asp-action="Add">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
             <div class="form-group">

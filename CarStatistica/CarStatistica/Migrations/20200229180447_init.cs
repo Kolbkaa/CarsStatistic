@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarStatistica.Migrations
 {
@@ -44,18 +44,6 @@ namespace CarStatistica.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Costs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Costs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,24 +163,17 @@ namespace CarStatistica.Migrations
                     StartMileage = table.Column<int>(nullable: false),
                     ActualMileage = table.Column<int>(nullable: false),
                     LastEdit = table.Column<DateTime>(nullable: false),
-                    CostsId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_Costs_CostsId",
-                        column: x => x.CostsId,
-                        principalTable: "Costs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Cars_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -206,15 +187,15 @@ namespace CarStatistica.Migrations
                     Mileage = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Comments = table.Column<string>(nullable: true),
-                    CostsId = table.Column<int>(nullable: false)
+                    CarId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Refuelings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Refuelings_Costs_CostsId",
-                        column: x => x.CostsId,
-                        principalTable: "Costs",
+                        name: "FK_Refuelings_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -259,20 +240,14 @@ namespace CarStatistica.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_CostsId",
-                table: "Cars",
-                column: "CostsId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cars_UserId",
                 table: "Cars",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Refuelings_CostsId",
+                name: "IX_Refuelings_CarId",
                 table: "Refuelings",
-                column: "CostsId");
+                column: "CarId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -293,19 +268,16 @@ namespace CarStatistica.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Cars");
-
-            migrationBuilder.DropTable(
                 name: "Refuelings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Cars");
 
             migrationBuilder.DropTable(
-                name: "Costs");
+                name: "AspNetUsers");
         }
     }
 }

@@ -20,7 +20,7 @@ namespace CarStatistica.Data.Repositories
             await _appDbContext.Cars.AddAsync(model);
             var result = await _appDbContext.SaveChangesAsync();
 
-            return result > 1;
+            return result > 0;
         }
 
         public async Task<Car> Get(int carId, User user)

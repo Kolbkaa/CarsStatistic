@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarStatistica.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200222232354_init")]
+    [Migration("20200229180447_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,9 +99,6 @@ namespace CarStatistica.Migrations
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CostsId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("LastEdit")
                         .HasColumnType("datetime2");
 
@@ -112,28 +109,14 @@ namespace CarStatistica.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CostsId")
-                        .IsUnique();
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("CarStatistica.Models.Costs", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Costs");
                 });
 
             modelBuilder.Entity("CarStatistica.Models.Refueling", b =>
@@ -143,14 +126,14 @@ namespace CarStatistica.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("CostsId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -163,7 +146,7 @@ namespace CarStatistica.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CostsId");
+                    b.HasIndex("CarId");
 
                     b.ToTable("Refuelings");
                 });
@@ -305,22 +288,18 @@ namespace CarStatistica.Migrations
 
             modelBuilder.Entity("CarStatistica.Models.Car", b =>
                 {
-                    b.HasOne("CarStatistica.Models.Costs", "Costs")
-                        .WithOne("Car")
-                        .HasForeignKey("CarStatistica.Models.Car", "CostsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CarStatistica.Data.User", "User")
                         .WithMany("Cars")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CarStatistica.Models.Refueling", b =>
                 {
-                    b.HasOne("CarStatistica.Models.Costs", "Costs")
+                    b.HasOne("CarStatistica.Models.Car", "Car")
                         .WithMany("Refuelings")
-                        .HasForeignKey("CostsId")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

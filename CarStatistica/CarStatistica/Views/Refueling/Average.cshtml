@@ -4,7 +4,7 @@
     ViewData["Title"] = "Średnie spalanie";
 }
 
-@await Html.PartialAsync("_CostNav", @TempData["CarId"])
+@await Html.PartialAsync("_CostNav", @Url.ActionContext.RouteData.Values["id"])
 
 <h4>Średnie spalanie</h4>
 
