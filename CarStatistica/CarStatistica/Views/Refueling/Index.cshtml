@@ -4,7 +4,7 @@
     ViewData["Title"] = "Lista tankowań";
 }
 
-@await Html.PartialAsync("_CostNav", @TempData["CarId"])
+@await Html.PartialAsync("_CostNav", @Url.ActionContext.RouteData.Values["id"])
 
 <h4>Lista tankowań</h4>
 <table class="table">

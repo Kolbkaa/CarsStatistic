@@ -1,5 +1,6 @@
 ﻿using CarStatistica.Data;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CarStatistica.Models
@@ -14,7 +15,6 @@ namespace CarStatistica.Models
         public Car()
         {
             CreateDate = DateTime.Now;
-            Costs = new Costs();
         }
 
         public int Id
@@ -63,11 +63,10 @@ namespace CarStatistica.Models
         [Display(Name = "Ostatnia data edycji")]
         public DateTime LastEdit { get; private set; }
 
-        public int CostsId { get; set; }
-        public Costs Costs { get; set; }
 
         public User User { get; set; }
-
+        [Required]
+        public ICollection<Refueling> Refuelings { get; set; }
 
         private void ChangeEditDate()
         {
