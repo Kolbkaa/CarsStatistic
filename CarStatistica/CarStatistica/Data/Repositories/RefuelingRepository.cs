@@ -55,7 +55,18 @@ namespace CarStatistica.Data.Repositories
             if (refuelingCount == 0)
                 return true;
 
-            var earlierRefueling = await _appDbContext?.Refuelings?.Include(x => x.Car)
+            var actualCarMileage = _appDbContext.Cars.Single(model => model.Id == carId && model.User.Equals(user))
+                .ActualMileage;
+
+           if (actualCarMileage > model.Mileage)
+                return false;
+
+           var addDateCar = _appDbContext.Cars.Single(model => model.Id == carId && model.User.Equals(user)).CreateDate;
+
+           if (addDateCar > model.Date)
+               return false;
+
+           var earlierRefueling = await _appDbContext?.Refuelings?.Include(x => x.Car)
                 ?.Where(car => car.Car.Id == carId && car.Car.User.Equals(user))?.Where(x => x.Mileage <= model.Mileage)
                 ?.OrderByDescending(x => x.Mileage)?.FirstOrDefaultAsync();
 
