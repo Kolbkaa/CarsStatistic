@@ -1,13 +1,22 @@
-﻿<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-        <ul class="navbar-nav">
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" asp-controller="Home" asp-action="Index">Strona główna</a>
             </li>
-            @await Html.PartialAsync("_UserNav")
+
+            <li class="nav-item dropdown">
+                @await Html.PartialAsync("_UserNav")
+            </li>
         </ul>
+        <div class="my-2 my-lg-0">
+            @await Html.PartialAsync("_LoginNav")
+        </div>
     </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-       @await Html.PartialAsync("_LoginNav")
-    </div>
+
 </nav>
