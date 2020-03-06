@@ -12,6 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
+        "MYAPP_ConnectionStrings__SqlExpress": "Server=mssql6.webio.pl,2401;Database=kolbkaa_carStat;Uid=kolbkaa_admin2020;Password=Dupabiskupa_2020;",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

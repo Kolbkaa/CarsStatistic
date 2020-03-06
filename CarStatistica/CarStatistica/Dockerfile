@@ -6,23 +6,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-#WORKDIR /src
-#COPY ["CarStatistica.csproj", "CarStatistica/"]
-#RUN ls
-#RUN dotnet restore "CarStatistica/CarStatistica.csproj"
-#COPY . ./
-#WORKDIR "/src/CarStatistica"
-#run ls
-#RUN dotnet build "CarStatistica.csproj" -c Release -o /app/build
-#
-#FROM build AS publish
-#RUN dotnet publish "CarStatistica.csproj" -c Release -o /app/publish
-#
-#FROM base AS final
-#WORKDIR /app
-#COPY --from=publish /app/publish .
-#ENTRYPOINT ["dotnet", "CarStatistica.dll"]
-#
+
 WORKDIR /src
 COPY ["CarStatistica.csproj","./"]
 RUN dotnet restore "./CarStatistica.csproj"

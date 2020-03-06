@@ -19,9 +19,11 @@ namespace CarStatistica
     public class Startup
     {
         private readonly IConfiguration _configuration;
-        public Startup(IConfiguration configuration)
+        public Startup()
         {
-            _configuration = configuration;
+            var configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder.AddJsonFile("appsettings.json").AddEnvironmentVariables("MYAPP_");
+            _configuration = configurationBuilder.Build();
         }
 
         public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddDebug(); });
