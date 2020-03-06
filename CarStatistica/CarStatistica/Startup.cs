@@ -12,16 +12,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.IO;
-using Microsoft.Extensions.FileProviders;
 
 namespace CarStatistica
 {
     public class Startup
     {
         private readonly IConfiguration _configuration;
-        public Startup(IConfiguration configuration)
+        public Startup()
         {
-            _configuration = configuration;
+            var configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder.AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables("MYAPP_");
+
+            _configuration = configurationBuilder.Build();
         }
 
         public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddDebug(); });
@@ -94,7 +97,7 @@ namespace CarStatistica
                 app.UseHsts();
             }
 
-            app.UseStaticFiles(); // For the wwwroot folder
+            app.UseStaticFiles(); 
 
             app.UseHttpsRedirection();
             app.UseRouting();
