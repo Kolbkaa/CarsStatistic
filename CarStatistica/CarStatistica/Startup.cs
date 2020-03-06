@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.IO;
-using Microsoft.Extensions.FileProviders;
 
 namespace CarStatistica
 {
@@ -22,7 +21,9 @@ namespace CarStatistica
         public Startup()
         {
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile("appsettings.json").AddEnvironmentVariables("MYAPP_");
+            configurationBuilder.AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables("MYAPP_");
+
             _configuration = configurationBuilder.Build();
         }
 
@@ -96,7 +97,7 @@ namespace CarStatistica
                 app.UseHsts();
             }
 
-            app.UseStaticFiles(); // For the wwwroot folder
+            app.UseStaticFiles(); 
 
             app.UseHttpsRedirection();
             app.UseRouting();
